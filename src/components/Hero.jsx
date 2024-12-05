@@ -29,7 +29,7 @@ const Hero = () => {
 
   useEffect(() => {
     if (loadedVideos === totalVideos - 1) setIsLoading(false);
-  }, [loadedVideos]);
+  }, [loadedVideos, totalVideos]);
 
   useGSAP(
     () => {
