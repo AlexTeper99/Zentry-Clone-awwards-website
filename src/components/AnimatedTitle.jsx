@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { gsap } from 'gsap';
 import { useEffect, useRef } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -53,6 +53,10 @@ const AnimatedTitle = ({ title, containerClass }) => {
       ))}
     </div>
   );
+};
+AnimatedTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+  containerClass: PropTypes.string,
 };
 
 export default AnimatedTitle;
