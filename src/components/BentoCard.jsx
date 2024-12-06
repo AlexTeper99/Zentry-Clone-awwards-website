@@ -64,7 +64,7 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
 
 BentoCard.propTypes = {
   src: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   description: PropTypes.string,
   isComingSoon: PropTypes.bool,
 };
