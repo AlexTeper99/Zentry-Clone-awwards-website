@@ -1,9 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
-import Button from './Button';
-import { TiLocationArrow } from 'react-icons/ti';
-import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/all';
+import { TiLocationArrow } from 'react-icons/ti';
+import { useEffect, useRef, useState } from 'react';
+
+import Button from './Button';
+import VideoPreview from './VideoPreview';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,25 +13,27 @@ const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
 
   const totalVideos = 4;
-  const nextVideoRef = useRef(null);
+  const nextVdRef = useRef(null);
 
   const handleVideoLoad = () => {
     setLoadedVideos(prev => prev + 1);
   };
-  const upcomingVideoIndex = (currentIndex % totalVideos) + 1;
+
+  useEffect(() => {
+    if (loadedVideos === totalVideos - 1) {
+      setLoading(false);
+    }
+  }, [loadedVideos]);
+
   const handleMiniVdClick = () => {
     setHasClicked(true);
 
-    setCurrentIndex(upcomingVideoIndex);
+    setCurrentIndex(prevIndex => (prevIndex % totalVideos) + 1);
   };
-
-  useEffect(() => {
-    if (loadedVideos === totalVideos - 1) setIsLoading(false);
-  }, [loadedVideos, totalVideos]);
 
   useGSAP(
     () => {
@@ -42,7 +46,7 @@ const Hero = () => {
           height: '100%',
           duration: 1,
           ease: 'power1.inOut',
-          onStart: nextVideoRef.current.play(),
+          onStart: () => nextVdRef.current.play(),
         });
         gsap.from('#current-video', {
           transformOrigin: 'center center',
@@ -80,39 +84,43 @@ const Hero = () => {
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
-      {isLoading && (
+      {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
+          {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
           <div className="three-body">
-            <div className="three-body__dot" />
-            <div className="three-body__dot" />
-            <div className="three-body__dot" />
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
           </div>
         </div>
       )}
+
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
       >
         <div>
           <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
-            <div
-              onClick={handleMiniVdClick}
-              className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
-            >
-              <video
-                ref={nextVideoRef}
-                src={getVideoSrc(upcomingVideoIndex)}
-                loop
-                muted
-                id="current-video"
-                className="size-64 origin-center scale-150 object-cover object-center"
-                onLoadedData={handleVideoLoad}
-              />
-            </div>
+            <VideoPreview>
+              <div
+                onClick={handleMiniVdClick}
+                className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
+              >
+                <video
+                  ref={nextVdRef}
+                  src={getVideoSrc((currentIndex % totalVideos) + 1)}
+                  loop
+                  muted
+                  id="current-video"
+                  className="size-64 origin-center scale-150 object-cover object-center"
+                  onLoadedData={handleVideoLoad}
+                />
+              </div>
+            </VideoPreview>
           </div>
 
           <video
-            ref={nextVideoRef}
+            ref={nextVdRef}
             src={getVideoSrc(currentIndex)}
             loop
             muted
@@ -150,7 +158,7 @@ const Hero = () => {
               id="watch-trailer"
               title="Watch trailer"
               leftIcon={<TiLocationArrow />}
-              containerClass="flex-center gap-1 !bg-yellow-300 "
+              containerClass="bg-yellow-300 flex-center gap-1"
             />
           </div>
         </div>
