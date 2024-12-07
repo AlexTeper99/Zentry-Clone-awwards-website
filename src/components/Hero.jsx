@@ -29,6 +29,14 @@ const Hero = () => {
     }
   }, [loadedVideos]);
 
+  useEffect(() => {
+    const loadTimeout = setTimeout(() => {
+      setLoading(false);
+    }, 10000);
+
+    return () => clearTimeout(loadTimeout);
+  }, []);
+
   const handleMiniVdClick = () => {
     setHasClicked(true);
 

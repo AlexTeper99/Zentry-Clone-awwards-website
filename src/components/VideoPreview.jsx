@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+
 import { gsap } from 'gsap';
 import { useState, useRef, useEffect } from 'react';
 
@@ -16,7 +16,7 @@ export const VideoPreview = ({ children }) => {
 
   // Handles mouse movement over the container
   const handleMouseMove = ({ clientX, clientY, currentTarget }) => {
-    // if (!isPC()) return;
+    if (!isPC()) return;
     const rect = currentTarget.getBoundingClientRect(); // Get dimensions of the container
 
     const xOffset = clientX - (rect.left + rect.width / 2); // Calculate X offset
