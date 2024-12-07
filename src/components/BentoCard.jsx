@@ -53,8 +53,8 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
                 background: `radial-gradient(100px circle at ${cursorPosition.x}px ${cursorPosition.y}px, #656fe288, #00000026)`,
               }}
             />
-            <TiLocationArrow className="relative z-20" />
-            <p className="relative z-20">coming soon</p>
+            <TiLocationArrow className="relative z-20 text-gray-400" />
+            <p className="relative z-20 text-gray-400">coming soon</p>
           </div>
         )}
       </div>
