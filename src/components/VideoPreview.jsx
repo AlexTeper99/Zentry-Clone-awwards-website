@@ -45,6 +45,7 @@ export const VideoPreview = ({ children }) => {
   };
 
   useEffect(() => {
+    if (!isPC()) return;
     // Reset the position of the content when hover ends
     if (!isHovering) {
       gsap.to(sectionRef.current, {

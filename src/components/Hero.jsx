@@ -15,8 +15,8 @@ const Hero = () => {
 
   const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
-
   const totalVideos = 4;
+
   const nextVdRef = useRef(null);
 
   const handleVideoLoad = () => {
@@ -24,22 +24,13 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    if (loadedVideos === totalVideos - 1) {
+    if (loadedVideos === totalVideos) {
       setLoading(false);
     }
   }, [loadedVideos]);
 
-  useEffect(() => {
-    const loadTimeout = setTimeout(() => {
-      setLoading(false);
-    }, 10000);
-
-    return () => clearTimeout(loadTimeout);
-  }, []);
-
   const handleMiniVdClick = () => {
     setHasClicked(true);
-
     setCurrentIndex(prevIndex => (prevIndex % totalVideos) + 1);
   };
 
@@ -90,11 +81,26 @@ const Hero = () => {
 
   const getVideoSrc = index => `videos/hero-${index}.mp4`;
 
+  useEffect(() => {
+    // Preload videos (to make sure they're ready)
+    const preloadVideos = () => {
+      const videoPreloads = [];
+      for (let i = 1; i <= totalVideos; i++) {
+        const video = document.createElement('video');
+        video.src = getVideoSrc(i);
+        video.preload = 'auto';
+        video.oncanplaythrough = handleVideoLoad; // This will ensure the video is ready
+        videoPreloads.push(video);
+      }
+    };
+
+    preloadVideos(); // Preload videos when the component mounts
+  }, []);
+
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
       {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
-          {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
           <div className="three-body">
             <div className="three-body__dot"></div>
             <div className="three-body__dot"></div>
