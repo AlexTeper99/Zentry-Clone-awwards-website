@@ -7,8 +7,9 @@ export const VideoPreview = ({ children }) => {
   const [isHovering, setIsHovering] = useState(false);
 
   const isPC = () => {
-    const userAgent = navigator.userAgent;
-    return /Windows|Macintosh|Linux/.test(userAgent);
+    return !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent,
+    );
   };
 
   const sectionRef = useRef(null); // Reference for the container section
