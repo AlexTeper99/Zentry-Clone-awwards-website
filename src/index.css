@@ -73,7 +73,13 @@ body {
   }
 
   .about-subtext {
-    @apply absolute bottom-[-88dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem];
+    @apply absolute bottom-[-95dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem];
+  }
+
+  @media (min-height: 768px) {
+    .about-subtext {
+      bottom: -85dvh; /* For larger screens like tablets and above */
+    }
   }
   .about-image {
     @apply absolute left-1/2 top-0 z-20 h-[60vh] w-[70dvw] origin-center -translate-x-1/2 overflow-hidden rounded-3xl sm:w-96 md:w-[30vw];
