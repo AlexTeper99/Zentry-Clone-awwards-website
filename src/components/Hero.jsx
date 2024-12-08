@@ -79,7 +79,8 @@ const Hero = () => {
     });
   });
 
-  const getVideoSrc = index => `videos/hero-${index}.mp4`;
+  const getVideoSrc = index =>
+    `https://res.cloudinary.com/do0xfwvhx/video/upload/f_auto:video,q_auto/hero-${index}`;
 
   useEffect(() => {
     // Preload videos (to make sure they're ready)
