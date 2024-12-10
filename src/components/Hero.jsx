@@ -15,6 +15,7 @@ const Hero = () => {
 
   const [currentIndexBackup, setcurrentIndexBackup] = useState(1);
 
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
   const totalVideos = 4;
@@ -91,25 +92,25 @@ const Hero = () => {
   const getVideoSrc = index =>
     `https://res.cloudinary.com/do0xfwvhx/video/upload/f_auto:video,q_auto/hero-${index}`;
 
-  useEffect(() => {
-    // Preload videos (to make sure they're ready)
-    const preloadVideos = () => {
-      const videoPreloads = [];
-      for (let i = 1; i <= totalVideos; i++) {
-        const video = document.createElement('video');
-        video.src = getVideoSrc(i);
-        video.preload = 'auto';
-        video.oncanplaythrough = handleVideoLoad; // This will ensure the video is ready
-        videoPreloads.push(video);
-      }
-    };
+  // useEffect(() => {
+  //   // Preload videos (to make sure they're ready)
+  //   const preloadVideos = () => {
+  //     const videoPreloads = [];
+  //     for (let i = 1; i <= totalVideos; i++) {
+  //       const video = document.createElement('video');
+  //       video.src = getVideoSrc(i);
+  //       video.preload = 'auto';
+  //       video.oncanplaythrough = handleVideoLoad; // This will ensure the video is ready
+  //       videoPreloads.push(video);
+  //     }
+  //   };
 
-    preloadVideos(); // Preload videos when the component mounts
-  }, []);
+  //   preloadVideos(); // Preload videos when the component mounts
+  // }, []);
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
-      {loading && (
+      {/* {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           <div className="three-body">
             <div className="three-body__dot"></div>
@@ -117,7 +118,7 @@ const Hero = () => {
             <div className="three-body__dot"></div>
           </div>
         </div>
-      )}
+      )} */}
 
       <div
         id="video-frame"
