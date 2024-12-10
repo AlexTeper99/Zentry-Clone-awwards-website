@@ -21,7 +21,8 @@ const Hero = () => {
 
   const nextVdRef = useRef(null);
 
-  const handleVideoLoad = () => {
+  const handleVideoLoad = event => {
+    console.log('Video loaded:', event.target.src);
     setLoadedVideos(prev => prev + 1);
   };
 
@@ -151,14 +152,16 @@ const Hero = () => {
             id="next-video"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
             onLoadedData={handleVideoLoad}
+            onError={e => console.error('Video failed to load:', e.target.src)}
           />
           <video
-            src={getVideoSrc(currentIndexBackup)}
+            src={getVideoSrc(currentIndexBackup) || '/public/videos/hero-1.mp4'}
             autoPlay
             loop
             muted
             className="absolute left-0 top-0 size-full object-cover object-center"
             onLoadedData={handleVideoLoad}
+            onError={e => console.error('Video failed to load:', e.target.src)}
           />
         </div>
 
