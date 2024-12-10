@@ -65,7 +65,7 @@ const Hero = () => {
 
         setTimeout(() => {
           setcurrentIndexBackup(currentIndex);
-        }, '6000');
+        }, '1000');
       }
     },
     {
@@ -173,7 +173,7 @@ const Hero = () => {
           />
           <video
             playsInline
-            src={getVideoSrc(currentIndexBackup) || '/public/videos/hero-1.mp4'}
+            src={getVideoSrc(currentIndexBackup)}
             autoPlay
             loop
             muted
