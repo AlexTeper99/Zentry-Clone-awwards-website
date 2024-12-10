@@ -51,16 +51,14 @@ const Hero = () => {
           onStart: () => nextVdRef.current.play(),
         });
 
-        gsap.from('#current-video', {
-          transformOrigin: 'center center',
-          scale: 0,
-          duration: 1.5,
-          ease: 'power1.inOut',
-        });
-
-        setTimeout(() => {
-          setcurrentIndexBackup(currentIndex);
-        }, '1000');
+        gsap
+          .from('#current-video', {
+            transformOrigin: 'center center',
+            scale: 0,
+            duration: 1.5,
+            ease: 'power1.inOut',
+          })
+          .eventCallback(() => setcurrentIndexBackup(currentIndex));
       }
     },
     {
@@ -134,13 +132,12 @@ const Hero = () => {
                 <video
                   ref={nextVdRef}
                   src={getVideoSrc((currentIndex % totalVideos) + 1)}
-                  loop
+                  playsInline
                   muted
+                  loop
                   id="current-video"
                   className="size-64 origin-center scale-150 object-cover object-center"
                   onLoadedData={handleVideoLoad}
-                  autoPlay
-                  playsInline
                 />
               </div>
             </VideoPreview>
@@ -149,22 +146,22 @@ const Hero = () => {
           <video
             ref={nextVdRef}
             src={getVideoSrc(currentIndex)}
-            loop
-            muted
             id="next-video"
-            autoPlay
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
             onLoadedData={handleVideoLoad}
             playsInline
+            autoPlay
+            muted
+            loop
           />
           <video
             src={getVideoSrc(currentIndexBackup)}
-            autoPlay
-            loop
-            muted
             className="absolute left-0 top-0 size-full object-cover object-center"
             onLoadedData={handleVideoLoad}
             playsInline
+            autoPlay
+            muted
+            loop
           />
         </div>
 
