@@ -65,7 +65,7 @@ const Hero = () => {
 
         setTimeout(() => {
           setcurrentIndexBackup(currentIndex);
-        }, '3600');
+        }, '6000');
       }
     },
     {
