@@ -28,6 +28,12 @@ const Hero = () => {
   useEffect(() => {
     if (loadedVideos === totalVideos) {
       setLoading(false);
+      const firstVideo = document.getElementById('next-video');
+      if (firstVideo) {
+        firstVideo.play().catch(err => {
+          console.warn('Autoplay was prevented:', err);
+        });
+      }
     }
   }, [loadedVideos]);
 
@@ -108,7 +114,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative h-dvh w-screen overflow-x-hidden">
+    <div
+      className="relative h-dvh w-screen overflow-x-hidden"
+      onClick={() => {
+        const videoElement = document.getElementById('next-video');
+        if (videoElement) {
+          videoElement.play();
+        }
+      }}
+    >
       {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           <div className="three-body">
