@@ -3,9 +3,9 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/all';
 import { TiLocationArrow } from 'react-icons/ti';
 import { useEffect, useRef, useState } from 'react';
-import { VideoPreview } from './VideoPreview';
 
 import Button from './Button';
+import VideoPreview from './VideoPreview';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,12 +28,6 @@ const Hero = () => {
   useEffect(() => {
     if (loadedVideos === totalVideos) {
       setLoading(false);
-      const firstVideo = document.getElementById('next-video');
-      if (firstVideo) {
-        firstVideo.play().catch(err => {
-          console.warn('Autoplay was prevented:', err);
-        });
-      }
     }
   }, [loadedVideos]);
 
@@ -114,15 +108,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div
-      className="relative h-dvh w-screen overflow-x-hidden"
-      onClick={() => {
-        const videoElement = document.getElementById('next-video');
-        if (videoElement) {
-          videoElement.play();
-        }
-      }}
-    >
+    <div className="relative h-dvh w-screen overflow-x-hidden">
       {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           <div className="three-body">
@@ -152,15 +138,12 @@ const Hero = () => {
                   id="current-video"
                   className="size-64 origin-center scale-150 object-cover object-center"
                   onLoadedData={handleVideoLoad}
-                  playsInline
-                  preload="auto"
                 />
               </div>
             </VideoPreview>
           </div>
 
           <video
-            playsInline
             ref={nextVdRef}
             src={getVideoSrc(currentIndex)}
             loop
@@ -168,19 +151,14 @@ const Hero = () => {
             id="next-video"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
             onLoadedData={handleVideoLoad}
-            onError={e => console.error('Video failed to load:', e.target.src)}
-            preload="auto"
           />
           <video
-            playsInline
             src={getVideoSrc(currentIndexBackup)}
             autoPlay
             loop
             muted
             className="absolute left-0 top-0 size-full object-cover object-center"
             onLoadedData={handleVideoLoad}
-            onError={e => console.error('Video failed to load:', e.target.src)}
-            preload="auto"
           />
         </div>
 
