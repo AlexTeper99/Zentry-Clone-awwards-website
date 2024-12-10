@@ -137,11 +137,13 @@ const Hero = () => {
                 id="current-video"
                 className="size-64 origin-center scale-150 object-cover object-center"
                 onLoadedData={handleVideoLoad}
+                playsInline
               />
             </div>
           </div>
 
           <video
+            playsInline
             ref={nextVdRef}
             src={getVideoSrc(currentIndex)}
             loop
@@ -152,6 +154,7 @@ const Hero = () => {
             onError={e => console.error('Video failed to load:', e.target.src)}
           />
           <video
+            playsInline
             src={getVideoSrc(currentIndexBackup) || '/public/videos/hero-1.mp4'}
             autoPlay
             loop
