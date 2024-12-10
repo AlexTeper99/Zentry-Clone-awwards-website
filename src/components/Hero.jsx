@@ -13,6 +13,8 @@ const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
 
+  const [currentIndexBackup, setcurrentIndexBackup] = useState(1);
+
   const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
   const totalVideos = 4;
@@ -47,12 +49,17 @@ const Hero = () => {
           ease: 'power1.inOut',
           onStart: () => nextVdRef.current.play(),
         });
+
         gsap.from('#current-video', {
           transformOrigin: 'center center',
           scale: 0,
           duration: 1.5,
           ease: 'power1.inOut',
         });
+
+        setTimeout(() => {
+          setcurrentIndexBackup(currentIndex);
+        }, '1000');
       }
     },
     {
@@ -77,6 +84,8 @@ const Hero = () => {
         scrub: true,
       },
     });
+
+    // setIsTriggered(true);
   });
 
   const getVideoSrc = index =>
@@ -144,9 +153,7 @@ const Hero = () => {
             onLoadedData={handleVideoLoad}
           />
           <video
-            src={getVideoSrc(
-              currentIndex === totalVideos - 1 ? 1 : currentIndex,
-            )}
+            src={getVideoSrc(currentIndexBackup)}
             autoPlay
             loop
             muted
