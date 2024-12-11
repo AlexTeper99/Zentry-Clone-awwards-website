@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { TiLocationArrow } from 'react-icons/ti';
@@ -24,10 +25,11 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
     <div className="relative size-full">
       <video
         src={src}
-        playsInline
+        playsInline={true}
         autoPlay
         muted
         loop
+        webkit-playsinline="true"
         className="absolute left-0 top-0 size-full object-cover object-center"
       />
       <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">

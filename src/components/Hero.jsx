@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/all';
@@ -132,7 +133,8 @@ const Hero = () => {
                 <video
                   ref={nextVdRef}
                   src={getVideoSrc((currentIndex % totalVideos) + 1)}
-                  playsInline
+                  webkit-playsinline="true"
+                  playsInline={true}
                   muted
                   loop
                   id="current-video"
@@ -149,7 +151,8 @@ const Hero = () => {
             id="next-video"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
             onLoadedData={handleVideoLoad}
-            playsInline
+            webkit-playsinline="true"
+            playsInline={true}
             autoPlay
             muted
             loop
@@ -158,7 +161,8 @@ const Hero = () => {
             src={getVideoSrc(currentIndexBackup)}
             className="absolute left-0 top-0 size-full object-cover object-center"
             onLoadedData={handleVideoLoad}
-            playsInline
+            webkit-playsinline="true"
+            playsInline={true}
             autoPlay
             muted
             loop

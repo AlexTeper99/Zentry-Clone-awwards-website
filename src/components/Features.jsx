@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { TiLocationArrow } from 'react-icons/ti';
 import { BentoCard } from './BentoCard';
 import { BentoTilt } from './BentoTilt';
@@ -82,10 +83,11 @@ const Features = () => (
         <BentoTilt className="bento-tilt_2">
           <video
             src="videos/feature-5.mp4"
-            playsInline
+            playsInline={true}
             autoPlay
             muted
             loop
+            webkit-playsinline="true"
             className="size-full object-cover object-center"
           />
         </BentoTilt>
