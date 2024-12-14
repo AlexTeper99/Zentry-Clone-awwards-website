@@ -16,7 +16,6 @@ const Hero = () => {
 
   const [currentIndexBackup, setcurrentIndexBackup] = useState(1);
 
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
   const totalVideos = 4;
@@ -28,7 +27,7 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    if (loadedVideos === totalVideos) {
+    if (loadedVideos === totalVideos - 1) {
       setLoading(false);
     }
   }, [loadedVideos]);
@@ -109,7 +108,7 @@ const Hero = () => {
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
-      {/* {loading && (
+      {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           <div className="three-body">
             <div className="three-body__dot"></div>
@@ -117,7 +116,7 @@ const Hero = () => {
             <div className="three-body__dot"></div>
           </div>
         </div>
-      )} */}
+      )}
 
       <div
         id="video-frame"
