@@ -17,6 +17,7 @@ body {
     src: url('/fonts/circularweb-book.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
 
   @font-face {
@@ -24,6 +25,7 @@ body {
     src: url('/fonts/general.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
 
   @font-face {
@@ -31,6 +33,7 @@ body {
     src: url('/fonts/robert-medium.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
 
   @font-face {
@@ -38,6 +41,7 @@ body {
     src: url('/fonts/robert-regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
 
   @font-face {
@@ -45,6 +49,7 @@ body {
     src: url('/fonts/zentry-regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
 }
 
